@@ -54,5 +54,36 @@ export const authService = {
   // Logout functionality
   logout: () => {
     localStorage.removeItem(CURRENT_USER_KEY);
+  },
+
+  // Update Profile functionality
+  updateProfile: (updatedData) => {
+    const users = authService.getUsers();
+    let currentUser = authService.getCurrentUser();
+    
+    if (!currentUser) throw new Error('No user logged in');
+
+    // Check if new username is taken by another user
+    if (updatedData.username && updatedData.username !== currentUser.username) {
+      const usernameExists = users.some(u => u.username === updatedData.username && u.id !== currentUser.id);
+      if (usernameExists) {
+        throw new Error('Username already exists');
+      }
+    }
+
+    // Update in USERS array
+    const updatedUsers = users.map(u => {
+      if (u.id === currentUser.id) {
+        return { ...u, ...updatedData };
+      }
+      return u;
+    });
+    localStorage.setItem(USERS_KEY, JSON.stringify(updatedUsers));
+
+    // Update in CURRENT_USER
+    currentUser = { ...currentUser, ...updatedData };
+    localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(currentUser));
+    
+    return currentUser;
   }
 };

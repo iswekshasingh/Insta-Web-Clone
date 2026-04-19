@@ -41,11 +41,19 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const updateProfile = async (updatedData) => {
+    // Simulate async network request
+    const updatedUser = authService.updateProfile(updatedData);
+    setUser(updatedUser);
+    return updatedUser;
+  };
+
   const value = {
     user,
     login,
     signup,
-    logout
+    logout,
+    updateProfile
   };
 
   // Prevent rendering children until we finish determining user auth state

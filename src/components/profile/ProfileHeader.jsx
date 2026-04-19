@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import EditProfileModal from './EditProfileModal';
 import './ProfileHeader.css';
 
 const ProfileHeader = ({ profile }) => {
+  const [isEditOpen, setIsEditOpen] = useState(false);
+
   return (
     <div className="profile-header">
       <div className="profile-image-container">
@@ -10,7 +13,7 @@ const ProfileHeader = ({ profile }) => {
       <div className="profile-info">
         <div className="profile-info-top">
           <h2 className="profile-username">{profile.username}</h2>
-          <button className="edit-profile-btn">Edit Profile</button>
+          <button className="edit-profile-btn" onClick={() => setIsEditOpen(true)}>Edit Profile</button>
           <button className="settings-btn">⚙️</button>
         </div>
         <div className="profile-stats">
@@ -26,6 +29,11 @@ const ProfileHeader = ({ profile }) => {
           </div>
         </div>
       </div>
+      <EditProfileModal 
+        isOpen={isEditOpen} 
+        onClose={() => setIsEditOpen(false)} 
+        currentProfile={profile} 
+      />
     </div>
   );
 };
