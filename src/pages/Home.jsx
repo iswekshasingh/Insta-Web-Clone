@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <Sidebar />
+      <Sidebar collapsed={true} />
       <main className="home-main-content">
         <div className="feed-section">
           <StoryBar />

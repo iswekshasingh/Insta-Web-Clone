@@ -4,7 +4,7 @@ import { SUGGESTIONS } from '../../data/dummyData';
 import './Suggestions.css';
 
 const Suggestions = () => {
-  const { user } = useAuth();
+  const { user, toggleFollow } = useAuth();
   
   return (
     <div className="suggestions-container">
@@ -24,18 +24,27 @@ const Suggestions = () => {
       </div>
 
       <div className="suggestions-list">
-        {SUGGESTIONS.map(s => (
-          <div key={s.id} className="suggestion-item">
-            <div className="suggestion-user">
-              <img src={s.avatar} alt={s.username} className="suggestion-avatar" />
-              <div className="suggestion-info">
-                <span className="suggestion-username">{s.username}</span>
-                <span className="suggestion-reason">Suggested for you</span>
+        {SUGGESTIONS.map(s => {
+          const isFollowing = user?.following?.includes(s.username);
+          return (
+            <div key={s.id} className="suggestion-item">
+              <div className="suggestion-user">
+                <img src={s.avatar} alt={s.username} className="suggestion-avatar" />
+                <div className="suggestion-info">
+                  <span className="suggestion-username">{s.username}</span>
+                  <span className="suggestion-reason">Suggested for you</span>
+                </div>
               </div>
+              <button 
+                className="follow-btn" 
+                onClick={() => toggleFollow(s.username)}
+                style={{ color: isFollowing ? '#fff' : '#0095f6' }}
+              >
+                {isFollowing ? 'Following' : 'Follow'}
+              </button>
             </div>
-            <button className="follow-btn">Follow</button>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
