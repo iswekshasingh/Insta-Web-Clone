@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './Sidebar.css';
 
-const Sidebar = () => {
+const Sidebar = ({ collapsed }) => {
   const { logout } = useAuth();
   const navigate = useNavigate();
 
@@ -13,19 +13,19 @@ const Sidebar = () => {
   };
 
   return (
-    <nav className="sidebar">
+    <nav className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-logo">
         <h1 style={{fontFamily: 'Playfair Display, serif'}}>Instagram</h1>
       </div>
       
       <ul className="sidebar-links">
-        <li className="sidebar-item active">
+        <li className="sidebar-item" onClick={() => navigate('/')}>
           <span className="material-symbols-outlined icon">home</span> Home
         </li>
         <li className="sidebar-item">
           <span className="material-symbols-outlined icon">search</span> Search
         </li>
-        <li className="sidebar-item">
+        <li className="sidebar-item" onClick={() => navigate('/messages')}>
           <span className="material-symbols-outlined icon">mail</span> Messages
         </li>
         <li className="sidebar-item">

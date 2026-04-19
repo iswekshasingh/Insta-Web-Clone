@@ -5,6 +5,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Home from './pages/Home'
+import Messages from './pages/Messages'
 
 function App() {
   return (
@@ -18,6 +19,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/messages" 
+            element={
+              <ProtectedRoute>
+                <Messages />
               </ProtectedRoute>
             } 
           />
