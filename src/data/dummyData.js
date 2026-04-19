@@ -1,9 +1,9 @@
 export const USERS = [
-  { id: 1, username: 'doggo.lover', avatar: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=150' },
-  { id: 2, username: 'nature.scapes', avatar: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=150' },
-  { id: 3, username: 'tech.guru', avatar: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=150' },
+  { id: 1, username: 'doggo.lover', avatar: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=150', note: 'Walk time! 🐾' },
+  { id: 2, username: 'nature.scapes', avatar: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=150', note: 'Feeling fresh 🍃' },
+  { id: 3, username: 'tech.guru', avatar: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=150', note: 'Coding late ☕' },
   { id: 4, username: 'foodie_adventures', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150' },
-  { id: 5, username: 'travel_bug', avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=150' },
+  { id: 5, username: 'travel_bug', avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=150', note: 'Wanderlust ✨' },
 ];
 
 export const STORIES = USERS.map(user => ({
