@@ -42,3 +42,20 @@ export const POSTS = [
 ];
 
 export const SUGGESTIONS = USERS.slice(1, 4);
+
+export const CURRENT_USER_PROFILE = {
+  username: 'sweksha_codes',
+  avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150',
+  bio: 'Frontend Developer 💻\nReact Enthusiast 🚀\nBuilding cool things on the web ✨',
+  followers: 1245,
+  following: 850,
+  postsCount: 12,
+  posts: [
+    { id: 1, image: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800', likes: 120, comments: 14 },
+    { id: 2, image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800', likes: 89, comments: 5 },
+    { id: 3, image: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=800', likes: 230, comments: 34 },
+    { id: 4, image: 'https://images.unsplash.com/photo-1618477247222-acbad0ea449a?w=800', likes: 56, comments: 2 },
+    { id: 5, image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800', likes: 412, comments: 67 },
+    { id: 6, image: 'https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?w=800', likes: 110, comments: 9 }
+  ]
+};

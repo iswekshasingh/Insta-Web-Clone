@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './PostCard.css';
 
 const PostCard = ({ post }) => {
+  const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(post.likes);
 
@@ -13,7 +15,7 @@ const PostCard = ({ post }) => {
   return (
     <div className="post-card">
       <div className="post-header">
-        <div className="post-user-info">
+        <div className="post-user-info" onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>
           <img src={post.user.avatar} alt={post.user.username} className="post-avatar" />
           <span className="post-username">{post.user.username}</span>
           <span className="post-time">• {post.timestamp}</span>
@@ -39,7 +41,7 @@ const PostCard = ({ post }) => {
       </div>
 
       <div className="post-caption-section">
-        <span className="caption-username">{post.user.username}</span>
+        <span className="caption-username" onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>{post.user.username}</span>
         <span className="caption-text">{post.caption}</span>
       </div>
 
