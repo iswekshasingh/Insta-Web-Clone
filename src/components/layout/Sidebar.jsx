@@ -20,34 +20,25 @@ const Sidebar = () => {
       
       <ul className="sidebar-links">
         <li className="sidebar-item active">
-          <span className="icon">🏠</span> Home
+          <span className="material-symbols-outlined icon">home</span> Home
         </li>
         <li className="sidebar-item">
-          <span className="icon">🔍</span> Search
+          <span className="material-symbols-outlined icon">search</span> Search
         </li>
         <li className="sidebar-item">
-          <span className="icon">🧭</span> Explore
+          <span className="material-symbols-outlined icon">mail</span> Messages
         </li>
         <li className="sidebar-item">
-          <span className="icon">🎬</span> Reels
+          <span className="material-symbols-outlined icon">favorite</span> Liked/Saved
         </li>
         <li className="sidebar-item">
-          <span className="icon">💬</span> Messages
-        </li>
-        <li className="sidebar-item">
-          <span className="icon">❤️</span> Notifications
-        </li>
-        <li className="sidebar-item">
-          <span className="icon">➕</span> Create
-        </li>
-        <li className="sidebar-item">
-          <span className="icon">👤</span> Profile
+          <span className="material-symbols-outlined icon">person</span> Profile
         </li>
       </ul>
 
       <div className="sidebar-footer">
         <div className="sidebar-item" onClick={handleLogout} style={{ cursor: 'pointer' }}>
-          <span className="icon">🚪</span> Logout
+          <span className="material-symbols-outlined icon">logout</span> Logout
         </div>
       </div>
     </nav>
