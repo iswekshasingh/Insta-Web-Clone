@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     const loadPosts = async () => {
       setLoading(true);
-      const fetchedPosts = await feedService.fetchPosts(10, 1);
+      const fetchedPosts = await feedService.fetchPosts(30, 1);
       setPosts(fetchedPosts);
       setLoading(false);
     };

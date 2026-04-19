@@ -13,9 +13,12 @@ const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) +
 export const feedService = {
   fetchPosts: async (limit = 10, page = 1) => {
     try {
-      // Fetch random images
-      const imgRes = await fetch(`https://picsum.photos/v2/list?page=${page}&limit=${limit}`);
-      const images = await imgRes.json();
+      // Fetch random images from another API (SlingAcademy Sample Photos)
+      // We offset randomly to get "diff pictures" over time if needed, but here we just grab the limit limit=offset
+      const randomOffset = getRandomInt(0, 50);
+      const imgRes = await fetch(`https://api.slingacademy.com/v1/sample-data/photos?limit=${limit}&offset=${randomOffset}`);
+      const imagesData = await imgRes.json();
+      const images = imagesData.photos || [];
 
       // Fetch random users
       const usersRes = await fetch(`https://randomuser.me/api/?results=${limit}`);
@@ -26,12 +29,12 @@ export const feedService = {
       const posts = images.map((img, index) => {
         const user = users[index];
         return {
-          id: img.id,
+          id: img.id.toString() + user.login.uuid,
           user: {
             username: user.login.username,
             avatar: user.picture.medium
           },
-          image: img.download_url,
+          image: img.url,
           caption: getRandomCaption(),
           likes: getRandomInt(10, 1000),
           comments: getRandomInt(0, 150),
