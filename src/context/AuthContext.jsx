@@ -42,10 +42,24 @@ export const AuthProvider = ({ children }) => {
   };
 
   const updateProfile = async (updatedData) => {
-    // Simulate async network request
     const updatedUser = authService.updateProfile(updatedData);
     setUser(updatedUser);
     return updatedUser;
+  };
+
+  const toggleFollow = (username) => {
+    const updatedUser = authService.toggleFollow(username);
+    if(updatedUser) setUser(updatedUser);
+  };
+
+  const toggleSave = (post) => {
+    const updatedUser = authService.toggleSavePost(post);
+    if(updatedUser) setUser(updatedUser);
+  };
+
+  const toggleLike = (postId) => {
+    const updatedUser = authService.toggleLikePost(postId);
+    if(updatedUser) setUser(updatedUser);
   };
 
   const value = {
@@ -53,7 +67,10 @@ export const AuthProvider = ({ children }) => {
     login,
     signup,
     logout,
-    updateProfile
+    updateProfile,
+    toggleFollow,
+    toggleSave,
+    toggleLike
   };
 
   // Prevent rendering children until we finish determining user auth state

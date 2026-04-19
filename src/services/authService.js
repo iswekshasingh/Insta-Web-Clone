@@ -25,7 +25,14 @@ export const authService = {
     }
 
     // Create a new user object
-    const newUser = { id: Date.now().toString(), email, password };
+    const newUser = { 
+      id: Date.now().toString(), 
+      email, 
+      password,
+      following: [],
+      savedPosts: [],
+      likedPosts: []
+    };
     users.push(newUser);
     
     // Update local storage
@@ -85,5 +92,45 @@ export const authService = {
     localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(currentUser));
     
     return currentUser;
+  },
+
+  // Interactive Actions
+  toggleFollow: (targetUsername) => {
+    let currentUser = authService.getCurrentUser();
+    if (!currentUser) return;
+    
+    const following = currentUser.following || [];
+    const isFollowing = following.includes(targetUsername);
+    const updatedFollowing = isFollowing 
+      ? following.filter(uname => uname !== targetUsername)
+      : [...following, targetUsername];
+      
+    return authService.updateProfile({ following: updatedFollowing });
+  },
+
+  toggleSavePost: (post) => {
+    let currentUser = authService.getCurrentUser();
+    if (!currentUser) return;
+    
+    const savedPosts = currentUser.savedPosts || [];
+    const isSaved = savedPosts.some(p => p.id === post.id);
+    const updatedSaved = isSaved 
+      ? savedPosts.filter(p => p.id !== post.id)
+      : [...savedPosts, post];
+      
+    return authService.updateProfile({ savedPosts: updatedSaved });
+  },
+
+  toggleLikePost: (postId) => {
+    let currentUser = authService.getCurrentUser();
+    if (!currentUser) return;
+    
+    const likedPosts = currentUser.likedPosts || [];
+    const isLiked = likedPosts.includes(postId);
+    const updatedLiked = isLiked 
+      ? likedPosts.filter(id => id !== postId)
+      : [...likedPosts, postId];
+      
+    return authService.updateProfile({ likedPosts: updatedLiked });
   }
 };
