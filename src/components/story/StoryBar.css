@@ -1,7 +1,7 @@
 .story-bar {
   display: flex;
   gap: 16px;
-  padding: 16px 0;
+  padding: 24px 0 16px 0;
   margin-bottom: 24px;
   overflow-x: auto;
   scrollbar-width: none; /* Firefox */
@@ -28,14 +28,18 @@
 
 .story-note-bubble {
   position: absolute;
-  top: -16px;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: #dcdcdc;
   color: #000;
   font-size: 11px;
   padding: 4px 8px;
   border-radius: 12px;
   white-space: nowrap;
-  max-width: 70px;
+  width: 70px;
+  box-sizing: border-box;
+  text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   box-shadow: 0 2px 5px rgba(0,0,0,0.15);
