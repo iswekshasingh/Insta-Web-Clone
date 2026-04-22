@@ -8,14 +8,14 @@ const PostCard = ({ post }) => {
   const { user, toggleLike, toggleSave, toggleFollow } = useAuth();
   
   // Safe derivations from Context
-  const isLiked = useMemo(() => user?.likedPosts?.includes(post.id), [user, post.id]);
+  const isLiked = useMemo(() => user?.likedPosts?.some(p => typeof p === 'string' ? p === post.id : p.id === post.id), [user, post.id]);
   const isSaved = useMemo(() => user?.savedPosts?.some(p => p.id === post.id), [user, post.id]);
   const isFollowing = useMemo(() => user?.following?.includes(post.user.username), [user, post.user.username]);
 
   // Derived counts
   const likesCount = isLiked ? post.likes + 1 : post.likes;
 
-  const handleLike = () => toggleLike(post.id);
+  const handleLike = () => toggleLike(post);
   const handleSave = () => toggleSave(post);
   const handleFollow = () => toggleFollow(post.user.username);
 

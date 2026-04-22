@@ -7,6 +7,7 @@ import Signup from './pages/Signup'
 import Home from './pages/Home'
 import Messages from './pages/Messages'
 import Profile from './pages/Profile'
+import Liked from './pages/Liked'
 
 function App() {
   return (
@@ -36,6 +37,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/liked" 
+            element={
+              <ProtectedRoute>
+                <Liked />
               </ProtectedRoute>
             } 
           />

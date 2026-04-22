@@ -28,8 +28,11 @@ const Sidebar = ({ collapsed }) => {
         <li className="sidebar-item" onClick={() => navigate('/messages')} style={{ cursor: 'pointer' }}>
           <span className="material-symbols-outlined icon">mail</span> Messages
         </li>
+        <li className="sidebar-item" onClick={() => navigate('/liked')} style={{ cursor: 'pointer' }}>
+          <span className="material-symbols-outlined icon">favorite</span> Liked
+        </li>
         <li className="sidebar-item">
-          <span className="material-symbols-outlined icon">favorite</span> Liked/Saved
+          <span className="material-symbols-outlined icon">add_box</span> Create
         </li>
         <li className="sidebar-item" onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>
           <span className="material-symbols-outlined icon">person</span> Profile

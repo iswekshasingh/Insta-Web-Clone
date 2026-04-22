@@ -57,8 +57,8 @@ export const AuthProvider = ({ children }) => {
     if(updatedUser) setUser(updatedUser);
   };
 
-  const toggleLike = (postId) => {
-    const updatedUser = authService.toggleLikePost(postId);
+  const toggleLike = (post) => {
+    const updatedUser = authService.toggleLikePost(post);
     if(updatedUser) setUser(updatedUser);
   };
 

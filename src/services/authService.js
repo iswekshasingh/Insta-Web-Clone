@@ -121,15 +121,15 @@ export const authService = {
     return authService.updateProfile({ savedPosts: updatedSaved });
   },
 
-  toggleLikePost: (postId) => {
+  toggleLikePost: (post) => {
     let currentUser = authService.getCurrentUser();
     if (!currentUser) return;
     
     const likedPosts = currentUser.likedPosts || [];
-    const isLiked = likedPosts.includes(postId);
+    const isLiked = likedPosts.some(p => typeof p === 'string' ? p === post.id : p.id === post.id);
     const updatedLiked = isLiked 
-      ? likedPosts.filter(id => id !== postId)
-      : [...likedPosts, postId];
+      ? likedPosts.filter(p => typeof p === 'string' ? p !== post.id : p.id !== post.id)
+      : [...likedPosts, post];
       
     return authService.updateProfile({ likedPosts: updatedLiked });
   }
