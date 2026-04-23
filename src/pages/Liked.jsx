@@ -16,10 +16,10 @@ const Liked = () => {
       <Sidebar />
       <main className="home-main-content">
         <div className="feed-section" style={{ margin: '0 auto', width: '100%', maxWidth: '600px' }}>
-          <h2 style={{ padding: '20px', color: '#fff', borderBottom: '1px solid #262626' }}>Liked Posts</h2>
+          <h2 style={{ padding: '20px', color: 'var(--text-primary)', borderBottom: '1px solid var(--border-color)' }}>Liked Posts</h2>
           <div className="posts-list">
             {validLikedPosts.length === 0 ? (
-              <p style={{textAlign: 'center', margin: '40px', color: '#a8a8a8'}}>No liked posts yet.</p>
+              <p style={{textAlign: 'center', margin: '40px', color: 'var(--text-secondary)'}}>No liked posts yet.</p>
             ) : (
               validLikedPosts.map(post => (
                 <PostCard key={post.id} post={post} />

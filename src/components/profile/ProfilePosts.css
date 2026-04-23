@@ -9,7 +9,7 @@
 .profile-post-item {
   position: relative;
   aspect-ratio: 1 / 1;
-  background-color: #262626;
+  background-color: var(--border-color);
   cursor: pointer;
   overflow: hidden;
 }

@@ -1,8 +1,9 @@
 .profile-page-container {
   display: flex;
   min-height: 100vh;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .profile-main-content {
@@ -19,7 +20,7 @@
 .profile-tabs {
   display: flex;
   justify-content: center;
-  border-top: 1px solid #262626;
+  border-top: 1px solid var(--border-color);
   margin-bottom: 20px;
 }
 
@@ -32,14 +33,15 @@
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1px;
-  color: #a8a8a8;
+  color: var(--text-secondary);
   cursor: pointer;
   border-top: 1px solid transparent;
+  transition: color var(--transition-speed);
 }
 
 .tab.active {
-  color: #fff;
-  border-top: 1px solid #fff;
+  color: var(--text-primary);
+  border-top: 1px solid var(--text-primary);
 }
 
 .tab-icon {

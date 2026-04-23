@@ -1,10 +1,11 @@
 .messages-layout {
   display: flex;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
   height: 100vh;
   margin: 0;
   overflow: hidden;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .messages-main-content {
@@ -16,7 +17,7 @@
 /* Left portion: Messages List Sidebar */
 .messages-sidebar {
   width: 400px;
-  border-right: 1px solid #262626;
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
 }
@@ -38,7 +39,7 @@
 
 .messages-header .dropdown-icon {
   font-size: 20px;
-  color: #a8a8a8;
+  color: var(--text-secondary);
   cursor: pointer;
 }
 
@@ -57,18 +58,18 @@
   left: 32px;
   top: 50%;
   transform: translateY(-50%);
-  color: #8e8e8e;
+  color: var(--text-secondary);
   font-size: 16px;
   margin-top: -10px;
 }
 
 .messages-search input {
   width: 100%;
-  background-color: #262626;
-  border: none;
+  background-color: var(--sidebar-hover);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 10px 10px 10px 40px;
-  color: #fff;
+  color: var(--text-primary);
   font-size: 14px;
   box-sizing: border-box;
 }
@@ -91,7 +92,7 @@
 }
 
 .messages-requests-header .requests-link {
-  color: #a8a8a8;
+  color: var(--text-secondary);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -121,7 +122,7 @@
 }
 
 .message-item:hover {
-  background-color: #1a1a1a;
+  background-color: var(--sidebar-hover);
 }
 
 .message-avatar {
@@ -144,7 +145,7 @@
 
 .message-preview {
   font-size: 13px;
-  color: #a8a8a8;
+  color: var(--text-secondary);
   margin-top: 4px;
 }
 
@@ -166,7 +167,7 @@
 .empty-chat-icon {
   width: 96px;
   height: 96px;
-  border: 2px solid #fff;
+  border: 2px solid var(--text-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -176,7 +177,7 @@
 
 .empty-chat-icon span {
   font-size: 48px;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .empty-chat h2 {
@@ -185,13 +186,13 @@
 }
 
 .empty-chat p {
-  color: #a8a8a8;
+  color: var(--text-secondary);
   font-size: 14px;
   margin: 0 0 24px 0;
 }
 
 .send-message-btn {
-  background-color: #0095f6;
+  background-color: var(--accent-color);
   color: #fff;
   border: none;
   padding: 7px 16px;
@@ -199,9 +200,9 @@
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color var(--transition-speed);
 }
 
 .send-message-btn:hover {
-  background-color: #1877f2;
+  filter: brightness(1.1);
 }

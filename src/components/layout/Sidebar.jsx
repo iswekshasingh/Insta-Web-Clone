@@ -1,10 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import './Sidebar.css';
 
 const Sidebar = ({ collapsed }) => {
   const { logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -36,6 +38,12 @@ const Sidebar = ({ collapsed }) => {
         </li>
         <li className="sidebar-item" onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>
           <span className="material-symbols-outlined icon">person</span> Profile
+        </li>
+        <li className="sidebar-item" onClick={toggleTheme} style={{ cursor: 'pointer' }}>
+          <span className="material-symbols-outlined icon">
+            {theme === 'dark' ? 'light_mode' : 'dark_mode'}
+          </span>
+          {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
         </li>
       </ul>
 

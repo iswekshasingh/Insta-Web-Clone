@@ -6,23 +6,26 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #F7F3E8; /* Ivory Whisper */
+  background-color: var(--bg-color);
   font-family: 'Inter', sans-serif;
-  color: #3B3024; /* Dark brown/charcoal */
+  color: var(--text-primary);
   padding: 20px;
   box-sizing: border-box;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .auth-card-container {
   display: flex;
   flex-direction: row;
-  background-color: #ffffff;
+  background-color: var(--card-bg);
   border-radius: 20px;
   padding: 12px;
   width: 100%;
   max-width: 1000px;
   min-height: 600px;
-  box-shadow: 0 15px 35px rgba(138, 114, 76, 0.08);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  transition: background-color var(--transition-speed), border-color var(--transition-speed);
 }
 
 .auth-image-section {
@@ -55,14 +58,14 @@
 }
 
 .auth-logo-icon {
-  color: #8A724C; /* Golden Sandstone */
+  color: var(--accent-color);
 }
 
 .auth-logo-text {
   font-family: 'Playfair Display', serif;
   font-size: 24px;
   font-weight: 700;
-  color: #3B3024;
+  color: var(--text-primary);
   letter-spacing: 0.5px;
 }
 
@@ -76,12 +79,12 @@
   font-size: 28px;
   font-weight: 600;
   margin: 0 0 12px 0;
-  color: #3B3024;
+  color: var(--text-primary);
 }
 
 .auth-description {
   font-size: 14px;
-  color: #7A6A53;
+  color: var(--text-secondary);
   margin: 0;
   font-weight: 300;
 }
@@ -113,7 +116,7 @@
 .auth-label {
   font-size: 13px;
   font-weight: 500;
-  color: #5C4E3D;
+  color: var(--text-primary);
   margin-bottom: 8px;
   letter-spacing: 0.2px;
 }
@@ -121,12 +124,12 @@
 .auth-input {
   padding: 14px 18px;
   border-radius: 30px;
-  border: 1px solid #E4D8C8; /* Custom soft border */
-  background-color: #FAFAFA;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-bg);
   font-size: 14px;
   outline: none;
   box-sizing: border-box;
-  color: #3B3024;
+  color: var(--text-primary);
   font-family: 'Inter', sans-serif;
   transition: all 0.3s ease;
 }
@@ -137,8 +140,8 @@
 }
 
 .auth-input:focus {
-  border-color: #8A724C; /* Golden Sandstone */
-  background-color: #ffffff;
+  border-color: var(--accent-color);
+  background-color: var(--card-bg);
   box-shadow: 0 0 0 3px rgba(138, 114, 76, 0.15); /* Focus glow effect */
 }
 
@@ -151,7 +154,7 @@
 
 .auth-checkbox-label {
   font-size: 13px;
-  color: #7A6A53;
+  color: var(--text-secondary);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -162,23 +165,23 @@
   cursor: pointer;
   width: 16px;
   height: 16px;
-  accent-color: #8A724C;
+  accent-color: var(--accent-color);
 }
 
 .auth-forgot-password {
   font-size: 13px;
-  color: #8A724C;
+  color: var(--accent-color);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
 }
 
 .auth-forgot-password:hover {
-  color: #5C4E3D;
+  color: var(--text-primary);
 }
 
 .auth-primary-btn {
-  background-color: #8A724C; /* Golden Sandstone */
+  background-color: var(--accent-color);
   color: #ffffff;
   border: none;
   border-radius: 30px;
@@ -207,13 +210,13 @@
 .auth-divider-line {
   flex: 1;
   height: 1px;
-  background-color: #EAE3D6;
+  background-color: var(--border-color);
   border: none;
 }
 
 .auth-divider-text {
   font-size: 13px;
-  color: #B99668; /* Amber Tresses */
+  color: var(--text-secondary);
   padding: 0 16px;
   font-weight: 400;
 }
@@ -226,13 +229,13 @@
 }
 
 .auth-social-btn {
-  background-color: #ffffff;
-  border: 1px solid #EAE3D6;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 30px;
   padding: 14px;
   font-size: 14px;
   font-weight: 500;
-  color: #3B3024;
+  color: var(--text-primary);
   font-family: 'Inter', sans-serif;
   cursor: pointer;
   display: flex;
@@ -243,8 +246,8 @@
 }
 
 .auth-social-btn:hover {
-  background-color: #FDFBf7;
-  border-color: #DCC9A7; /* Silken Dune */
+  background-color: var(--sidebar-hover);
+  border-color: var(--accent-color);
 }
 
 .auth-footer-container {
@@ -253,19 +256,19 @@
 
 .auth-footer-text {
   font-size: 13px;
-  color: #7A6A53;
+  color: var(--text-secondary);
   margin: 0;
 }
 
 .auth-footer-link {
-  color: #8A724C;
+  color: var(--accent-color);
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .auth-footer-link:hover {
-  color: #5C4E3D;
+  color: var(--text-primary);
 }
 
 /* Responsive constraints */

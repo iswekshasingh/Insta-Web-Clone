@@ -4,13 +4,14 @@
   position: fixed;
   left: 0;
   top: 0;
-  border-right: 1px solid #262626;
-  background-color: #000;
+  border-right: 1px solid var(--border-color);
+  background-color: var(--bg-color);
   padding: 24px 12px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   z-index: 1000;
+  transition: width 0.3s, background-color var(--transition-speed), border-color var(--transition-speed);
 }
 
 .sidebar-logo {
@@ -21,7 +22,7 @@
 .sidebar-logo h1 {
   margin: 0;
   font-size: 24px;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .sidebar-links {
@@ -37,14 +38,14 @@
   padding: 12px;
   margin-bottom: 8px;
   border-radius: 8px;
-  color: #fff;
+  color: var(--text-primary);
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .sidebar-item:hover {
-  background-color: #1a1a1a;
+  background-color: var(--sidebar-hover);
 }
 
 .sidebar-item.active {

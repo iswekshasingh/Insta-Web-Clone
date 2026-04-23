@@ -38,7 +38,7 @@ const Suggestions = () => {
               <button 
                 className="follow-btn" 
                 onClick={() => toggleFollow(s.username)}
-                style={{ color: isFollowing ? '#fff' : '#0095f6' }}
+                style={{ color: isFollowing ? 'var(--text-primary)' : 'var(--accent-color)' }}
               >
                 {isFollowing ? 'Following' : 'Follow'}
               </button>

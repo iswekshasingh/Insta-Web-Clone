@@ -2,11 +2,12 @@
   display: flex;
   padding: 30px 20px;
   margin-bottom: 44px;
-  border-bottom: 1px solid #262626;
+  border-bottom: 1px solid var(--border-color);
   max-width: 935px;
   margin-left: auto;
   margin-right: auto;
-  color: #fff;
+  color: var(--text-primary);
+  transition: color var(--transition-speed), border-color var(--transition-speed);
 }
 
 .profile-image-container {
@@ -22,7 +23,7 @@
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid #262626;
+  border: 1px solid var(--border-color);
 }
 
 .profile-info {
@@ -42,25 +43,26 @@
 }
 
 .edit-profile-btn {
-  background-color: #363636;
-  color: #fff;
-  border: none;
+  background-color: var(--sidebar-hover);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 7px 16px;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
   margin-right: 15px;
+  transition: background-color var(--transition-speed), border-color var(--transition-speed);
 }
 
 .edit-profile-btn:hover {
-  background-color: #262626;
+  background-color: var(--border-color);
 }
 
 .settings-btn {
   background: none;
   border: none;
-  color: #fff;
+  color: var(--text-primary);
   font-size: 20px;
   cursor: pointer;
 }

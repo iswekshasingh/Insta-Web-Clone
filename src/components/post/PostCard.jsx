@@ -25,9 +25,9 @@ const PostCard = ({ post }) => {
         <div className="post-user-info" style={{ display: 'flex', alignItems: 'center' }}>
           <img src={post.user.avatar} alt={post.user.username} className="post-avatar" onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }} />
           <span className="post-username" onClick={() => navigate('/profile')} style={{ cursor: 'pointer', margin: '0 5px' }}>{post.user.username}</span>
-          <span className="post-time" style={{ color: '#a8a8a8' }}>• {post.timestamp}</span>
+          <span className="post-time" style={{ color: 'var(--text-secondary)' }}>• {post.timestamp}</span>
           {user?.username !== post.user.username && (
-             <span className="follow-action" onClick={handleFollow} style={{ color: isFollowing ? '#fff' : '#0095f6', fontWeight: 'bold', cursor: 'pointer', marginLeft: '10px' }}>
+             <span className="follow-action" onClick={handleFollow} style={{ color: isFollowing ? 'var(--text-primary)' : 'var(--accent-color)', fontWeight: 'bold', cursor: 'pointer', marginLeft: '10px' }}>
                 • {isFollowing ? 'Following' : 'Follow'}
              </span>
           )}

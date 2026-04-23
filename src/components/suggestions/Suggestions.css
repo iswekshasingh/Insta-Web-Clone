@@ -25,18 +25,18 @@
 .my-username {
   font-weight: 600;
   font-size: 14px;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .my-fullname {
-  color: #a8a8a8;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
 .switch-btn, .follow-btn {
   background: none;
   border: none;
-  color: #0095f6;
+  color: var(--accent-color);
   font-weight: 600;
   font-size: 12px;
   cursor: pointer;
@@ -50,7 +50,7 @@
 }
 
 .suggestions-title {
-  color: #a8a8a8;
+  color: var(--text-secondary);
   font-weight: 600;
   font-size: 14px;
 }
@@ -58,7 +58,7 @@
 .see-all-btn {
   background: none;
   border: none;
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 600;
   font-size: 12px;
   cursor: pointer;
@@ -92,10 +92,10 @@
 .suggestion-username {
   font-weight: 600;
   font-size: 14px;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .suggestion-reason {
   font-size: 12px;
-  color: #a8a8a8;
+  color: var(--text-secondary);
 }
