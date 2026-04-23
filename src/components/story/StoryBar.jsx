@@ -21,7 +21,8 @@ const StoryBar = () => {
   };
 
   return (
-    <div className="story-bar">
+    <div className="story-bar-wrapper" style={{ position: 'relative' }}>
+      <div className="story-bar" id="story-scroll-container">
       <div className="story-item my-story">
         <div className="story-ring-container">
           {isEditingNote ? (
@@ -62,6 +63,15 @@ const StoryBar = () => {
           <span className="story-username">{story.username.substring(0, 10)}</span>
         </div>
       ))}
+      </div>
+      <button className="story-scroll-btn right" onClick={() => {
+        const container = document.getElementById('story-scroll-container');
+        if (container) container.scrollBy({ left: 300, behavior: 'smooth' });
+      }}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+          <path d="M9.59 16.59L14.17 12 9.59 7.41L11 6l6 6-6 6z"/>
+        </svg>
+      </button>
     </div>
   );
 };

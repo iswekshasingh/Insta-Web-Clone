@@ -4,6 +4,11 @@ export const USERS = [
   { id: 3, username: 'tech.guru', avatar: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=150', note: 'Coding late ☕' },
   { id: 4, username: 'foodie_adventures', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150' },
   { id: 5, username: 'travel_bug', avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=150', note: 'Wanderlust ✨' },
+  { id: 6, username: 'art.vibes', avatar: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=150', note: 'New piece! 🎨' },
+  { id: 7, username: 'fitness.freak', avatar: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=150' },
+  { id: 8, username: 'bookworm_99', avatar: 'https://images.unsplash.com/photo-1474366521946-c3d4b507abf2?w=150', note: 'Chapter 1 📖' },
+  { id: 9, username: 'music.junkie', avatar: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150', note: 'New beat 🎧' },
+  { id: 10, username: 'photography_hub', avatar: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=150', note: 'Golden hour 🌅' },
 ];
 
 export const STORIES = USERS.map(user => ({
