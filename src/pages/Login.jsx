@@ -24,7 +24,7 @@ const Login = () => {
   return (
     <AuthForm 
       isLogin={true}
-      title="Instagram"
+      title="Velora"
       subtitle="Login to your account"
       description="Welcome back! Enter your details to log in to your account"
       buttonText="Login"
