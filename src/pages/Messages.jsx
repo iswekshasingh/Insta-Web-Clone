@@ -1,5 +1,6 @@
 import React from 'react';
 import Sidebar from '../components/layout/Sidebar';
+import { useAuth } from '../context/AuthContext';
 import './Messages.css';
 
 const DUMMY_MESSAGES = [
@@ -16,6 +17,8 @@ const DUMMY_MESSAGES = [
 ];
 
 const Messages = () => {
+  const { user } = useAuth();
+  const displayUsername = user?.username || user?.email?.split('@')[0] || 'you';
   return (
     <div className="messages-layout">
       <Sidebar collapsed={true} />
@@ -23,7 +26,7 @@ const Messages = () => {
       <main className="messages-main-content">
         <div className="messages-sidebar">
           <div className="messages-header">
-            <h2>ft.kavyaa__ <span className="material-symbols-outlined dropdown-icon">expand_more</span></h2>
+            <h2>{displayUsername} <span className="material-symbols-outlined dropdown-icon">expand_more</span></h2>
             <span className="material-symbols-outlined edit-icon">edit_square</span>
           </div>
 

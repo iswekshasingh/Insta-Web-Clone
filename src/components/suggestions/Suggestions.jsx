@@ -1,21 +1,27 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { SUGGESTIONS } from '../../data/dummyData';
 import './Suggestions.css';
 
 const Suggestions = () => {
   const { user, toggleFollow } = useAuth();
+  const navigate = useNavigate();
   
   return (
     <div className="suggestions-container">
       {/* Current User Profile Preview */}
-      <div className="my-profile-preview">
+      <div 
+        className="my-profile-preview" 
+        onClick={() => navigate('/profile')} 
+        style={{ cursor: 'pointer' }}
+      >
         <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="profile" className="my-avatar" />
         <div className="my-info">
-          <span className="my-username">{user?.email?.split('@')[0] || 'user'}</span>
+          <span className="my-username">{user?.username || user?.email?.split('@')[0] || 'user'}</span>
           <span className="my-fullname">{user?.email}</span>
         </div>
-        <button className="switch-btn">Switch</button>
+        <button className="switch-btn" onClick={(e) => e.stopPropagation()}>Switch</button>
       </div>
 
       <div className="suggestions-header">
