@@ -4,10 +4,18 @@ import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import './Sidebar.css';
 
-const Sidebar = ({ collapsed }) => {
+const Sidebar = ({ collapsed, onSearchClick }) => {
   const { logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
+
+  const handleSearchClick = () => {
+    if (onSearchClick) {
+      onSearchClick();
+    } else {
+      navigate('/', { state: { openSearch: true } });
+    }
+  };
 
   const handleLogout = () => {
     logout();
@@ -24,7 +32,7 @@ const Sidebar = ({ collapsed }) => {
         <li className="sidebar-item active" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
           <span className="material-symbols-outlined icon">home</span> Home
         </li>
-        <li className="sidebar-item">
+        <li className="sidebar-item" onClick={handleSearchClick} style={{ cursor: 'pointer' }}>
           <span className="material-symbols-outlined icon">search</span> Search
         </li>
         <li className="sidebar-item" onClick={() => navigate('/messages')} style={{ cursor: 'pointer' }}>
