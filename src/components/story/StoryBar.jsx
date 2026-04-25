@@ -12,6 +12,7 @@ const StoryBar = () => {
   const [myNote, setMyNote] = useState('');
   const [isEditingNote, setIsEditingNote] = useState(false);
   const [tempNote, setTempNote] = useState('');
+  const [activeNote, setActiveNote] = useState(null); // { text, avatar, username }
 
   const handleNoteSubmit = (e) => {
     if (e.key === 'Enter') {
@@ -39,7 +40,20 @@ const StoryBar = () => {
               />
             </div>
           ) : (
-            <div className="story-note-bubble" onClick={() => { setIsEditingNote(true); setTempNote(myNote); }}>
+            <div
+              className="story-note-bubble"
+              onClick={(e) => {
+                if (myNote) {
+                  e.stopPropagation();
+                  setActiveNote({ text: myNote, avatar: userAvatar, username: user?.username || 'You' });
+                } else {
+                  setIsEditingNote(true);
+                  setTempNote(myNote);
+                }
+              }}
+              onDoubleClick={() => { setIsEditingNote(true); setTempNote(myNote); }}
+              title={myNote ? 'Click to view • Double-click to edit' : 'Click to add a note'}
+            >
               {myNote || "Note..."}
             </div>
           )}
@@ -55,7 +69,15 @@ const StoryBar = () => {
       {STORIES.map(story => (
         <div key={story.id} className="story-item">
           <div className="story-ring-container">
-            {story.note && <div className="story-note-bubble">{story.note}</div>}
+            {story.note && (
+              <div
+                className="story-note-bubble clickable-note"
+                onClick={(e) => { e.stopPropagation(); setActiveNote({ text: story.note, avatar: story.avatar, username: story.username }); }}
+                title="Click to read full note"
+              >
+                {story.note}
+              </div>
+            )}
             <div className={`story-ring ${story.viewed ? 'viewed' : ''}`}>
               <img src={story.avatar} alt={story.username} className="story-avatar" />
             </div>
@@ -72,6 +94,18 @@ const StoryBar = () => {
           <path d="M9.59 16.59L14.17 12 9.59 7.41L11 6l6 6-6 6z"/>
         </svg>
       </button>
+
+      {/* Note Modal */}
+      {activeNote && (
+        <div className="note-modal-overlay" onClick={() => setActiveNote(null)}>
+          <div className="note-modal" onClick={(e) => e.stopPropagation()}>
+            <img src={activeNote.avatar} alt={activeNote.username} className="note-modal-avatar" />
+            <p className="note-modal-username">{activeNote.username}</p>
+            <div className="note-modal-text">{activeNote.text}</div>
+            <button className="note-modal-close" onClick={() => setActiveNote(null)}>✕</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
