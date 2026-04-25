@@ -25,7 +25,7 @@ const Sidebar = ({ collapsed, onSearchClick }) => {
   return (
     <nav className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-logo">
-        <h1 style={{fontFamily: 'Playfair Display, serif'}}>Instagram</h1>
+        <h1 style={{fontFamily: 'Playfair Display, serif'}}>Velora</h1>
       </div>
       
       <ul className="sidebar-links">
