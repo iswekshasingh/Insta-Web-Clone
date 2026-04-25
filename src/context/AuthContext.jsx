@@ -31,9 +31,9 @@ export const AuthProvider = ({ children }) => {
     return loggedInUser;
   };
 
-  const signup = async (email, password) => {
+  const signup = async (email, password, username) => {
     // Simulate async network request
-    authService.signup(email, password);
+    authService.signup(email, password, username);
   };
 
   const logout = () => {

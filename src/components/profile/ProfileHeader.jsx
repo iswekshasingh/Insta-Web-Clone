@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import EditProfileModal from './EditProfileModal';
 import './ProfileHeader.css';
 
-const ProfileHeader = ({ profile }) => {
+const ProfileHeader = ({ profile, openFollowingModal }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
 
   return (
@@ -19,9 +19,10 @@ const ProfileHeader = ({ profile }) => {
         <div className="profile-stats">
           <span><strong>{profile.postsCount}</strong> posts</span>
           <span><strong>{profile.followers}</strong> followers</span>
-          <span><strong>{profile.following}</strong> following</span>
+          <span onClick={openFollowingModal} style={{ cursor: 'pointer' }}><strong>{profile.following}</strong> following</span>
         </div>
         <div className="profile-bio">
+          {profile.name && <div className="profile-name" style={{ fontWeight: '600', fontSize: '15px', marginBottom: '4px' }}>{profile.name}</div>}
           <div className="bio-text">
             {profile.bio.split('\n').map((line, index) => (
               <span key={index}>{line}<br /></span>

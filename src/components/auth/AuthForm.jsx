@@ -1,6 +1,6 @@
-// src/components/auth/AuthForm.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { authService } from '../../services/authService';
 import './AuthForm.css';
 
 const AuthForm = ({ 
@@ -17,31 +17,112 @@ const AuthForm = ({
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [usernameAvailable, setUsernameAvailable] = useState(false);
   const [localError, setLocalError] = useState('');
+  const [toastMessage, setToastMessage] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+
+  // Load remembered email on mount
+  React.useEffect(() => {
+    if (isLogin) {
+      const savedEmail = localStorage.getItem('insta_remembered_email');
+      if (savedEmail) {
+        setEmail(savedEmail);
+        setRememberMe(true);
+      }
+    }
+  }, [isLogin]);
+
+  const showToast = (msg) => {
+    setToastMessage(msg);
+    setTimeout(() => setToastMessage(''), 3000);
+  };
+
+  const handleUsernameChange = (e) => {
+    const value = e.target.value;
+    setUsername(value);
+    
+    if (value.length === 0) {
+      setUsernameError('');
+      setUsernameAvailable(false);
+      return;
+    }
+
+    if (value.length < 3) {
+      setUsernameError('Username must be at least 3 characters');
+      setUsernameAvailable(false);
+      return;
+    }
+
+    if (/\s/.test(value)) {
+      setUsernameError('Username cannot contain spaces');
+      setUsernameAvailable(false);
+      return;
+    }
+
+    if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+      setUsernameError('Only letters, numbers, and underscores allowed');
+      setUsernameAvailable(false);
+      return;
+    }
+
+    const isTaken = authService.checkUsername(value);
+    if (isTaken) {
+      setUsernameError('Username already taken');
+      setUsernameAvailable(false);
+    } else {
+      setUsernameError('');
+      setUsernameAvailable(true);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLocalError('');
 
-    // Basic empty fields validation
-    if (!email.trim() || !password.trim()) {
-      setLocalError('Please fill in all fields');
-      return;
-    }
+    if (!isLogin) {
+      if (!email.trim() || !password.trim() || !username.trim()) {
+        setLocalError('Please fill in all fields');
+        return;
+      }
+      if (usernameError) {
+        setLocalError('Please fix username errors');
+        return;
+      }
+      onSubmit(email, password, setLocalError, username);
+    } else {
+      if (!email.trim() || !password.trim()) {
+        setLocalError('Please fill in all fields');
+        return;
+      }
+      
+      // Handle Remember Me
+      if (rememberMe) {
+        localStorage.setItem('insta_remembered_email', email);
+      } else {
+        localStorage.removeItem('insta_remembered_email');
+      }
 
-    // Call parent handler with credentials
-    onSubmit(email, password, setLocalError);
+      onSubmit(email, password, setLocalError);
+    }
   };
 
   return (
     <div className="auth-page-container">
+      {/* Toaster Popup */}
+      <div className={`auth-toast ${toastMessage ? 'show' : ''}`}>
+        {toastMessage}
+      </div>
+
       <div className="auth-card-container">
         
         {/* Left Image Section - Luxury Style */}
         <div className="auth-image-section">
           {/* A luxurious interior minimalism image perfectly complementing the golden palette */}
           <img 
-            src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=1200&auto=format&fit=crop" 
+            src="/auth_hero.png" 
             alt="Luxury Aesthetic" 
             className="auth-image"
           />
@@ -67,6 +148,21 @@ const AuthForm = ({
           )}
 
           <form onSubmit={handleSubmit} className="auth-form">
+            {!isLogin && (
+              <div className="auth-input-group">
+                <label className="auth-label">Username</label>
+                <input 
+                  type="text" 
+                  placeholder="Choose a unique username" 
+                  value={username}
+                  onChange={handleUsernameChange}
+                  className={`auth-input ${usernameError ? 'input-error' : ''} ${usernameAvailable ? 'input-success' : ''}`}
+                />
+                {usernameError && <span className="auth-validation-msg error">{usernameError}</span>}
+                {usernameAvailable && <span className="auth-validation-msg success">Username available</span>}
+              </div>
+            )}
+
             <div className="auth-input-group">
               <label className="auth-label">Email Address</label>
               <input 
@@ -92,10 +188,15 @@ const AuthForm = ({
             {isLogin && (
               <div className="auth-options-row">
                 <label className="auth-checkbox-label">
-                  <input type="checkbox" className="auth-checkbox" />
+                  <input 
+                    type="checkbox" 
+                    className="auth-checkbox" 
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                  />
                   Remember me
                 </label>
-                <a href="#" className="auth-forgot-password">Forgot password?</a>
+                <a href="#" className="auth-forgot-password" onClick={(e) => { e.preventDefault(); showToast("Password reset link sent to your email!"); }}>Forgot password?</a>
               </div>
             )}
 
@@ -111,13 +212,13 @@ const AuthForm = ({
           </div>
 
           <div className="auth-social-btns">
-            <button className="auth-social-btn" type="button">
+            <button className="auth-social-btn" type="button" onClick={() => showToast("Sign in with Apple is currently unavailable.")}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.05 2.65.72 3.4 1.8-1.51.9-2.58 3.5-1.07 5.25.96 1.13 2.15 1.53 2.15 1.53-1.04 2.87-2.14 3.48-3.13 4.43zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
               </svg>
               Sign in with Apple
             </button>
-            <button className="auth-social-btn" type="button">
+            <button className="auth-social-btn" type="button" onClick={() => showToast("Sign in with Google is currently unavailable.")}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{color: '#ea4335'}}>
                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>

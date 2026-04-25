@@ -9,10 +9,10 @@ const Signup = () => {
   const { signup } = useAuth();
   const navigate = useNavigate();
 
-  const handleSignup = async (email, password) => {
+  const handleSignup = async (email, password, setLocalError, username) => {
     setError(''); // Clear previous errors
     try {
-      await signup(email, password);
+      await signup(email, password, username);
       // Redirect to Login after successful signup
       navigate('/login');
     } catch (err) {

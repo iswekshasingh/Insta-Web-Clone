@@ -1,0 +1,130 @@
+.following-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.following-modal-container {
+  background: var(--bg-color, white);
+  color: var(--text-color, #262626);
+  width: 400px;
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.following-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color, #dbdbdb);
+}
+
+.following-modal-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.following-modal-header .close-modal-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text-color, #262626);
+  padding: 0;
+}
+
+.following-modal-list {
+  padding: 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.following-user-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.following-user-row:last-child {
+  margin-bottom: 0;
+}
+
+.following-user-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+}
+
+.following-user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.following-username {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.following-name {
+  color: var(--text-secondary, #8e8e8e);
+  font-size: 14px;
+}
+
+.following-btn {
+  background: var(--bg-color, white);
+  color: var(--text-color, #262626);
+  border: 1px solid var(--border-color, #dbdbdb);
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.following-btn:hover {
+  opacity: 0.8;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+[data-theme='dark'] .following-modal-container {
+  background: #121212;
+  color: white;
+}
+
+[data-theme='dark'] .following-modal-header .close-modal-btn {
+  color: white;
+}
+
+[data-theme='dark'] .following-btn {
+  background: #121212;
+  color: white;
+  border-color: #363636;
+}
+
+[data-theme='dark'] .following-modal-header {
+  border-color: #363636;
+}

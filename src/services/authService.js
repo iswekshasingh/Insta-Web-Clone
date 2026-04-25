@@ -14,14 +14,27 @@ export const authService = {
     return JSON.parse(localStorage.getItem(CURRENT_USER_KEY) || 'null');
   },
 
+  // Check if username is taken
+  checkUsername: (username) => {
+    const users = authService.getUsers();
+    return users.some(u => u.username === username);
+  },
+
   // Signup functionality
-  signup: (email, password) => {
+  signup: (email, password, username) => {
     const users = authService.getUsers();
     
     // Check if user already exists
     const existingUser = users.find(u => u.email === email);
     if (existingUser) {
-      throw new Error('User already exists');
+      throw new Error('Email already registered');
+    }
+
+    if (username) {
+      const existingUsername = users.find(u => u.username === username);
+      if (existingUsername) {
+        throw new Error('Username already taken');
+      }
     }
 
     // Create a new user object
@@ -29,7 +42,7 @@ export const authService = {
       id: Date.now().toString(), 
       email, 
       password,
-      username: email.split('@')[0],   // derive username from email
+      username: username || email.split('@')[0],
       following: [],
       savedPosts: [],
       likedPosts: []

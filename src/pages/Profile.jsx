@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import Sidebar from '../components/layout/Sidebar';
 import ProfileHeader from '../components/profile/ProfileHeader';
 import ProfilePosts from '../components/profile/ProfilePosts';
+import FollowingModal from '../components/profile/FollowingModal';
 import { CURRENT_USER_PROFILE } from '../data/dummyData';
 import { useAuth } from '../context/AuthContext';
 import './Profile.css';
@@ -9,6 +10,10 @@ import './Profile.css';
 const Profile = () => {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState('POSTS');
+  const [showFollowing, setShowFollowing] = useState(false);
+
+  const openFollowingModal = () => setShowFollowing(true);
+  const closeFollowingModal = () => setShowFollowing(false);
   
   const displayProfile = useMemo(() => {
     return {
@@ -32,7 +37,7 @@ const Profile = () => {
       <Sidebar />
       <main className="profile-main-content">
         <div className="profile-content-wrapper">
-          <ProfileHeader profile={displayProfile} />
+          <ProfileHeader profile={displayProfile} openFollowingModal={openFollowingModal} />
           
           <div className="profile-tabs">
             <div className={`tab ${activeTab === 'POSTS' ? 'active' : ''}`} onClick={() => setActiveTab('POSTS')}>
@@ -41,12 +46,26 @@ const Profile = () => {
             <div className={`tab ${activeTab === 'SAVED' ? 'active' : ''}`} onClick={() => setActiveTab('SAVED')}>
               <span className="tab-icon material-symbols-outlined">bookmark</span> SAVED
             </div>
-            <div className="tab">
-               TAGGED
+            <div className={`tab ${activeTab === 'TAGGED' ? 'active' : ''}`} onClick={() => setActiveTab('TAGGED')}>
+               <span className="tab-icon material-symbols-outlined">sell</span> TAGGED
             </div>
           </div>
           
-          {gridPosts.length > 0 ? (
+          {activeTab === 'TAGGED' ? (
+            <div style={{ textAlign: 'center', marginTop: '60px', color: 'var(--text-color, #262626)' }}>
+              <div style={{ 
+                width: '60px', height: '60px', 
+                border: '2px solid var(--text-color, #262626)', 
+                borderRadius: '50%', 
+                display: 'flex', alignItems: 'center', justifyContent: 'center', 
+                margin: '0 auto 20px' 
+              }}>
+                <span className="material-symbols-outlined" style={{ fontSize: '32px' }}>sell</span>
+              </div>
+              <h2 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '10px' }}>No tagged posts yet</h2>
+              <p style={{ fontSize: '14px' }}>When people tag you, they'll appear here.</p>
+            </div>
+          ) : gridPosts.length > 0 ? (
             <ProfilePosts posts={gridPosts} />
           ) : (
             <div style={{ textAlign: 'center', marginTop: '40px', color: '#a8a8a8' }}>
@@ -54,6 +73,7 @@ const Profile = () => {
             </div>
           )}
         </div>
+        {showFollowing && <FollowingModal onClose={closeFollowingModal} />}
       </main>
     </div>
   );
