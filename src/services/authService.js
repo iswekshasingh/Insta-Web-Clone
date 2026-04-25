@@ -29,6 +29,7 @@ export const authService = {
       id: Date.now().toString(), 
       email, 
       password,
+      username: email.split('@')[0],   // derive username from email
       following: [],
       savedPosts: [],
       likedPosts: []
@@ -54,6 +55,12 @@ export const authService = {
 
     // Omit password before storing the active session user
     const { password: _, ...userWithoutPassword } = user;
+
+    // Backfill username if missing (for users registered before this field was added)
+    if (!userWithoutPassword.username) {
+      userWithoutPassword.username = user.email.split('@')[0];
+    }
+
     localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(userWithoutPassword));
     return userWithoutPassword;
   },

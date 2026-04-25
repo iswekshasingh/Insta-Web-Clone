@@ -12,10 +12,15 @@ const Profile = () => {
   
   const displayProfile = useMemo(() => {
     return {
+      // Start with dummy data as a base (for posts grid etc.)
       ...CURRENT_USER_PROFILE,
-      ...user, 
-      following: user?.following?.length || 0, // dynamic following count
-      postsCount: CURRENT_USER_PROFILE.posts.length
+      // Override everything with the real logged-in user's data
+      username:   user?.username   || CURRENT_USER_PROFILE.username,
+      avatar:     user?.avatar     || CURRENT_USER_PROFILE.avatar,
+      bio:        user?.bio        || CURRENT_USER_PROFILE.bio,
+      followers:  user?.followers  ?? CURRENT_USER_PROFILE.followers,
+      following:  user?.following?.length ?? CURRENT_USER_PROFILE.following,
+      postsCount: CURRENT_USER_PROFILE.posts.length,
     };
   }, [user]);
 
