@@ -16,9 +16,27 @@ const StoryBar = () => {
 
   const handleNoteSubmit = (e) => {
     if (e.key === 'Enter') {
-      setMyNote(tempNote);
+      const saved = tempNote.trim();
+      setMyNote(saved);
       setIsEditingNote(false);
+      if (saved) {
+        setActiveNote({ text: saved, avatar: userAvatar, username: user?.username || 'You', isOwn: true });
+      }
     }
+  };
+
+  const handleNoteBlur = () => {
+    const saved = tempNote.trim();
+    setMyNote(saved);
+    setIsEditingNote(false);
+    if (saved) {
+      setActiveNote({ text: saved, avatar: userAvatar, username: user?.username || 'You', isOwn: true });
+    }
+  };
+
+  const handleDeleteNote = () => {
+    setMyNote('');
+    setActiveNote(null);
   };
 
   return (
@@ -34,7 +52,7 @@ const StoryBar = () => {
                  value={tempNote} 
                  onChange={e => setTempNote(e.target.value)} 
                  onKeyDown={handleNoteSubmit}
-                 onBlur={() => { setMyNote(tempNote); setIsEditingNote(false); }}
+                 onBlur={handleNoteBlur}
                  placeholder="Share a thought..." 
                  maxLength={60}
               />
@@ -43,15 +61,15 @@ const StoryBar = () => {
             <div
               className="story-note-bubble"
               onClick={(e) => {
+                e.stopPropagation();
                 if (myNote) {
-                  e.stopPropagation();
-                  setActiveNote({ text: myNote, avatar: userAvatar, username: user?.username || 'You' });
+                  setActiveNote({ text: myNote, avatar: userAvatar, username: user?.username || 'You', isOwn: true });
                 } else {
                   setIsEditingNote(true);
-                  setTempNote(myNote);
+                  setTempNote('');
                 }
               }}
-              onDoubleClick={() => { setIsEditingNote(true); setTempNote(myNote); }}
+              onDoubleClick={(e) => { e.stopPropagation(); setIsEditingNote(true); setTempNote(myNote); }}
               title={myNote ? 'Click to view • Double-click to edit' : 'Click to add a note'}
             >
               {myNote || "Note..."}
@@ -99,10 +117,16 @@ const StoryBar = () => {
       {activeNote && (
         <div className="note-modal-overlay" onClick={() => setActiveNote(null)}>
           <div className="note-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="note-modal-close" onClick={() => setActiveNote(null)}>✕</button>
             <img src={activeNote.avatar} alt={activeNote.username} className="note-modal-avatar" />
             <p className="note-modal-username">{activeNote.username}</p>
             <div className="note-modal-text">{activeNote.text}</div>
-            <button className="note-modal-close" onClick={() => setActiveNote(null)}>✕</button>
+            {activeNote.isOwn && (
+              <div className="note-modal-actions">
+                <button className="note-modal-edit-btn" onClick={() => { setActiveNote(null); setIsEditingNote(true); setTempNote(myNote); }}>✏️ Edit</button>
+                <button className="note-modal-delete-btn" onClick={handleDeleteNote}>🗑️ Delete</button>
+              </div>
+            )}
           </div>
         </div>
       )}

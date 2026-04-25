@@ -240,3 +240,45 @@
   color: #fff;
   background: rgba(255,255,255,0.1);
 }
+
+/* Own-note action buttons */
+.note-modal-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.note-modal-edit-btn,
+.note-modal-delete-btn {
+  flex: 1;
+  padding: 9px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.12s ease;
+}
+
+.note-modal-edit-btn {
+  background: #2a2a2a;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
+
+.note-modal-delete-btn {
+  background: rgba(220, 38, 38, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(220, 38, 38, 0.35);
+}
+
+.note-modal-edit-btn:hover {
+  opacity: 0.85;
+  transform: scale(1.03);
+}
+
+.note-modal-delete-btn:hover {
+  background: rgba(220, 38, 38, 0.3);
+  transform: scale(1.03);
+}
