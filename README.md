@@ -1,4 +1,4 @@
-# 📸 Instagram Clone (React)
+# 📸 Velora 
 
 A responsive Instagram clone built using React, featuring authentication, routing, and a modern UI.
 
